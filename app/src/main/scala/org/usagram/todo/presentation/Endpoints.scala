@@ -35,6 +35,10 @@ object Endpoints extends ScalatraServlet with JacksonJsonSupport {
     run(GetUnfinishedTaskListApplicationService, GetUnfinishedTaskListInbound, GetUnfinishedTaskListOutbound)
   }
 
+  get("/GetTaskStatistics") {
+    run(GetTaskStatisticsApplicationService, GetTaskStatisticsInbound, GetTaskStatisticsOutbound)
+  }
+
   private def run[A, B](applicationService: ApplicationService[A, B], inbound: ScalatraInbound[A], outbound: ScalatraOutbound[B]): ActionResult = {
     val request = new ScalatraRequest(this)
     outbound(applicationService(inbound(request)))
